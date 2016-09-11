@@ -129,54 +129,54 @@ public interface StoryParserConstants {
      */
     int IN_SCENARIO_ANY = 36;
 
-    /**
-     * Lexical state.
-     */
-    int DEFAULT = 0;
-    /**
-     * Lexical state.
-     */
-    int IN_META = 1;
+  /** Lexical state. */
+  int DEFAULT = 0;
+  /** Lexical state. */
+  int IN_META = 1;
   /** Lexical state. */
   int IN_NARRATIVE = 2;
   /** Lexical state. */
   int IN_COMMENT = 3;
+    /** Lexical state. */
+  int IN_NARRATIVE_COMMENT = 4;
     /**
      * Lexical state.
      */
-    int IN_NARRATIVE_COMMENT = 4;
-  /** Lexical state. */
-  int IN_META_COMMENT = 5;
-  /** Lexical state. */
-  int IN_SCENARIO_COMMENT = 6;
-  /** Lexical state. */
-  int IN_GIVEN = 7;
-  /** Lexical state. */
+    int IN_META_COMMENT = 5;
+    /**
+     * Lexical state.
+     */
+    int IN_SCENARIO_COMMENT = 6;
+    /**
+     * Lexical state.
+     */
+    int IN_GIVEN = 7;
+    /** Lexical state. */
   int IN_SCENARIO = 8;
 
   /** Literal token values. */
   String[] tokenImage = {
     "<EOF>",
-          "\"Meta:\"",
-          "\"Narrative:\"",
-          "\"Scenario:\"",
-          "\"Given\"",
-          "\" \"",
-          "\"\\t\"",
-          "\"\\n\"",
-          "\"\\r\"",
-          "\"Narrative:\"",
+    "\"Meta:\"",
+    "\"Narrative:\"",
     "\"Scenario:\"",
     "\"Given\"",
-          "\"!--\"",
-          "\"@ignore\"",
+    "\" \"",
+    "\"\\t\"",
+    "\"\\n\"",
+    "\"\\r\"",
+    "\"Narrative:\"",
+    "\"Scenario:\"",
+    "\"Given\"",
+    "\"!--\"",
+    "\"@ignore\"",
     "<IN_META_ANY>",
     "\"Meta:\"",
-          "\"Scenario:\"",
+    "\"Scenario:\"",
     "\"!--\"",
     "<IN_NARRATIVE_ANY>",
-          "<COMMENT_END>",
-          "<N_COMMENT_END>",
+    "<COMMENT_END>",
+    "<N_COMMENT_END>",
     "<M_COMMENT_END>",
     "<JIRA_ID>",
     "\"CPV\"",

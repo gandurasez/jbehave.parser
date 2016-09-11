@@ -212,11 +212,11 @@ public Story parseStory( final String fileName) :
     boolean isStoryIgnored = false;
 }
 {
-    [Meta()]
+    [{isStoryIgnored = Meta();}]
 
     [{storyDesc = Narrative(); }]
 
-    (Scenario( scenarios ))*
+    (Scenario( scenarios, isStoryIgnored ))*
 
     [<EOF>]
 
@@ -230,7 +230,7 @@ private boolean Meta():
     boolean isIgnored = false;
 }
 {
-    <META>
+    [<META>
     (
         <META_COMMENT>
         |
@@ -247,7 +247,9 @@ private boolean Meta():
     {
         System.out.printf("Meta: [ignored - %s]\n", isIgnored);
         return isIgnored;
-    }
+    }]
+
+    {return false;}
 }
 
 private String Narrative():
@@ -256,7 +258,7 @@ private String Narrative():
     StringBuilder builder = new StringBuilder();
 }
 {
-    <NARRATIVE>
+    [<NARRATIVE>
     (
         <NARRATIVE_COMMENT>
         |
@@ -270,10 +272,12 @@ private String Narrative():
     {
         System.out.printf("Narrative: [%s]\n", builder.toString());
         return builder.toString();
-    }
+    }]
+
+    {return builder.toString();}
 }
 
-private void Scenario( final Collection<Scenario> scenarios ):
+private void Scenario( final Collection<Scenario> scenarios, final boolean isStoryIgnored ):
 {
     Token token;
     final StringBuilder builder = new StringBuilder();
@@ -302,7 +306,7 @@ private void Scenario( final Collection<Scenario> scenarios ):
 
     {
         System.out.printf("Scenario: [%s]\n", builder.toString());
-        if(isIgnored)
+        if(isStoryIgnored || isIgnored)
         {
             scenarios.add(new Scenario(builder.toString(),relatedJiras, isIgnored ));
         }

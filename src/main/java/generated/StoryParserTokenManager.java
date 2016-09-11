@@ -2021,9 +2021,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return t;
     }
 
-    /**
-     * Get the next Token.
-     */
+    /** Get the next Token. */
     public Token getNextToken() {
         Token specialToken = null;
         Token matchedToken;
@@ -2288,8 +2286,8 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
                 input_stream.backup(5);
                 break;
-            case 33:
-                image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+      case 33 :
+        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
         input_stream.backup(9);
          break;
       default :
