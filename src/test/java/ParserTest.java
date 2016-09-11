@@ -1,46 +1,69 @@
-import generated.StoryParser;
+import model.Scenario;
+import model.Story;
 import org.junit.Test;
 
-import java.io.File;
+import java.util.Collection;
+import java.util.Iterator;
 
-/**
- * Created by ignattolstov on 07.09.16.
- */
+import static utils.TestUtils.*;
+
+
 public class ParserTest {
 
     @Test
     public void test1() {
-        parse("test.story");
+        checkStory(getStory("test1.story"), "", Collection::isEmpty);
     }
-
 
     @Test
     public void test2() {
-        parse("test2.story");
-    }
+        final Story story = getStory("test2.story");
+        checkStory(story,
+                "As a user\n" +
+                        "I want to perform an action\n" +
+                        "So that I can achieve a business goal",
+                s -> s.size() == 1);
 
+        checkScenario(story.getScenarios().iterator().next(), "scenario description");
+    }
 
     @Test
     public void test3() {
-        parse("test3.story");
+        final Story story = getStory("test3.story");
+        checkStory(story,
+                "As a user\n" +
+                        "I want to perform an action\n" +
+                        "So that I can achieve a business goal",
+                s -> s.size() == 1);
+
+        checkScenario(story.getScenarios().iterator().next(), "scenario description");
     }
 
     @Test
     public void test4() {
-        parse("test4.story");
+        final Story story = getStory("test4.story");
+        checkStory(story,
+                "As a user\n" +
+                        "I want to perform an action\n" +
+                        "So that I can achieve a business goal",
+                s -> s.size() == 1);
+
+        checkScenario(story.getScenarios().iterator().next(), "scenario description");
     }
 
     @Test
     public void test5() {
-        parse("test5.story");
+        final Story story = getStory("test5.story");
+        checkStory(story,
+                "As a user\n" +
+                        "I want to perform an action\n" +
+                        "So that I can achieve a business goal",
+                s -> s.size() == 4);
+
+        final Iterator<Scenario> itr = story.getScenarios().iterator();
+        checkScenario(itr.next(), "scenario description1");
+        checkScenario(itr.next(), "scenario description2");
+        checkScenario(itr.next(), "scenario description3");
+        checkScenario(itr.next(), "scenario description4");
     }
-
-    public void parse(final String filePath) {
-
-        StoryParser.parse(
-                new File(
-                        getClass().getClassLoader().getResource(filePath).getFile()));
-
-    }
-
 }

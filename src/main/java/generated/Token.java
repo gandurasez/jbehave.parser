@@ -122,14 +122,15 @@ public class Token implements java.io.Serializable {
      */
     public Object getValue() {
         return null;
-    }
+  }
 
-    /**
-     * Returns the image.
-     */
-    public String toString() {
-        return image;
-    }
+  /**
+   * Returns the image.
+   */
+  public String toString()
+  {
+    return image;
+  }
 
 }
 /* JavaCC - OriginalChecksum=ab3514bdefb41b66da8d1a8695eaee82 (do not edit this line) */

@@ -43,7 +43,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
 
     };
     protected static final int[][] kindForState = {
-            null
+null
             ,
             null
             ,
@@ -69,32 +69,32 @@ public class StoryParserTokenManager implements StoryParserConstants {
     static final long[] jjtoMore = {
             0x180000L,
     };
-    static private final int[] jjrounds = new int[1];
-    static private final int[] jjstateSet = new int[2];
-    private static final StringBuilder jjimage = new StringBuilder();
+    private final int[] jjrounds = new int[1];
+    private final int[] jjstateSet = new int[2];
+    private final StringBuilder jjimage = new StringBuilder();
     /**
      * Debug output.
      */
-    public static java.io.PrintStream debugStream = System.out;
-    static protected SimpleCharStream input_stream;
-    static protected char curChar;
-    static int curLexState = 0;
-    static int defaultLexState = 0;
-    static int jjnewStateCnt;
-    static int jjround;
-    static int jjmatchedPos;
-    static int jjmatchedKind;
-    static int kindCnt = 0;
-    private static StringBuilder image = jjimage;
-    private static int jjimageLen;
-    private static int lengthOfMatch;
+    public java.io.PrintStream debugStream = System.out;
+    protected SimpleCharStream input_stream;
+    protected char curChar;
+    int curLexState = 0;
+    int defaultLexState = 0;
+    int jjnewStateCnt;
+    int jjround;
+    int jjmatchedPos;
+    int jjmatchedKind;
+    int kindCnt = 0;
+    private StringBuilder image = jjimage;
+    private int jjimageLen;
+    private int lengthOfMatch;
 
     /**
      * Constructor.
      */
     public StoryParserTokenManager(SimpleCharStream stream) {
-        if (input_stream != null)
-            throw new TokenMgrError("ERROR: Second call to constructor of static lexer. You must use ReInit() to initialize the static variables.", TokenMgrError.STATIC_LEXER_ERROR);
+        if (SimpleCharStream.staticFlag)
+            throw new Error("ERROR: Cannot use a static CharStream class with a non-static lexical analyzer.");
         input_stream = stream;
     }
 
@@ -109,11 +109,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
     /**
      * Set debug output.
      */
-    public static void setDebugStream(java.io.PrintStream ds) {
+    public void setDebugStream(java.io.PrintStream ds) {
         debugStream = ds;
     }
 
-    static private int jjStopAtPos(int pos, int kind) {
+    private int jjStopAtPos(int pos, int kind) {
         jjmatchedKind = kind;
         jjmatchedPos = pos;
         debugStream.println("   No more string literal token matches are possible.");
@@ -121,7 +121,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return pos + 1;
     }
 
-    static private int jjMoveStringLiteralDfa0_0() {
+    private int jjMoveStringLiteralDfa0_0() {
         switch (curChar) {
             case 33:
                 return jjMoveStringLiteralDfa1_0(0x100000L);
@@ -143,18 +143,18 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa1_0(long active0) {
+    private int jjMoveStringLiteralDfa1_0(long active0) {
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
             debugStream.println("   Currently matched the first " + (jjmatchedPos + 1) + " characters as a " + tokenImage[jjmatchedKind] + " token.");
         debugStream.println("   Possible string literal matches : { "
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 1;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 45:
                 return jjMoveStringLiteralDfa2_0(active0, 0x100000L);
@@ -176,7 +176,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa2_0(long old0, long active0) {
+    private int jjMoveStringLiteralDfa2_0(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 2;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -185,11 +185,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 2;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 45:
                 if ((active0 & 0x100000L) != 0L)
@@ -214,7 +214,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 3;
     }
 
-    static private int jjMoveStringLiteralDfa3_0(long old0, long active0) {
+    private int jjMoveStringLiteralDfa3_0(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 3;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -223,11 +223,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 3;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 65:
             case 97:
@@ -247,7 +247,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa4_0(long old0, long active0) {
+    private int jjMoveStringLiteralDfa4_0(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 4;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -256,11 +256,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 4;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 58:
                 if ((active0 & 0x2L) != 0L)
@@ -281,7 +281,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 5;
     }
 
-    static private int jjMoveStringLiteralDfa5_0(long old0, long active0) {
+    private int jjMoveStringLiteralDfa5_0(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 5;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -290,11 +290,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 5;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 82:
             case 114:
@@ -308,7 +308,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa6_0(long old0, long active0) {
+    private int jjMoveStringLiteralDfa6_0(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 6;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -317,11 +317,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 6;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 73:
             case 105:
@@ -332,7 +332,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa7_0(long old0, long active0) {
+    private int jjMoveStringLiteralDfa7_0(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 7;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -341,11 +341,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 7;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 79:
             case 111:
@@ -359,7 +359,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa8_0(long old0, long active0) {
+    private int jjMoveStringLiteralDfa8_0(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 8;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -368,11 +368,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 8;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 58:
                 if ((active0 & 0x8L) != 0L)
@@ -388,7 +388,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 9;
     }
 
-    static private int jjMoveStringLiteralDfa9_0(long old0, long active0) {
+    private int jjMoveStringLiteralDfa9_0(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 9;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -397,11 +397,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 9;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 58:
                 if ((active0 & 0x4L) != 0L)
@@ -414,7 +414,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 10;
     }
 
-    static private int jjMoveStringLiteralDfa0_5() {
+    private int jjMoveStringLiteralDfa0_5() {
         switch (curChar) {
             case 33:
                 return jjMoveStringLiteralDfa1_5(0x4000000L);
@@ -433,18 +433,18 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa1_5(long active0) {
+    private int jjMoveStringLiteralDfa1_5(long active0) {
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
             debugStream.println("   Currently matched the first " + (jjmatchedPos + 1) + " characters as a " + tokenImage[jjmatchedKind] + " token.");
         debugStream.println("   Possible string literal matches : { "
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 1;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 45:
                 return jjMoveStringLiteralDfa2_5(active0, 0x4000000L);
@@ -463,7 +463,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa2_5(long old0, long active0) {
+    private int jjMoveStringLiteralDfa2_5(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 2;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -472,11 +472,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 2;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 45:
                 if ((active0 & 0x4000000L) != 0L)
@@ -498,7 +498,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 3;
     }
 
-    static private int jjMoveStringLiteralDfa3_5(long old0, long active0) {
+    private int jjMoveStringLiteralDfa3_5(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 3;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -507,11 +507,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 3;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 65:
             case 97:
@@ -528,7 +528,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa4_5(long old0, long active0) {
+    private int jjMoveStringLiteralDfa4_5(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 4;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -537,11 +537,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 4;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 58:
                 if ((active0 & 0x1000000L) != 0L)
@@ -562,7 +562,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 5;
     }
 
-    static private int jjMoveStringLiteralDfa5_5(long old0, long active0) {
+    private int jjMoveStringLiteralDfa5_5(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 5;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -571,11 +571,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 5;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 82:
             case 114:
@@ -586,7 +586,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa6_5(long old0, long active0) {
+    private int jjMoveStringLiteralDfa6_5(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 6;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -595,11 +595,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 6;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 73:
             case 105:
@@ -610,7 +610,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa7_5(long old0, long active0) {
+    private int jjMoveStringLiteralDfa7_5(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 7;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -619,11 +619,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 7;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 79:
             case 111:
@@ -634,7 +634,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa8_5(long old0, long active0) {
+    private int jjMoveStringLiteralDfa8_5(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 8;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -643,11 +643,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 8;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 58:
                 if ((active0 & 0x2000000L) != 0L)
@@ -660,17 +660,17 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 9;
     }
 
-    static private int jjMoveStringLiteralDfa0_3() {
+    private int jjMoveStringLiteralDfa0_3() {
         return jjMoveNfa_3(0, 0);
     }
 
-    static private int jjMoveNfa_3(int startState, int curPos) {
+    private int jjMoveNfa_3(int startState, int curPos) {
         int startsAt = 0;
         jjnewStateCnt = 1;
         int i = 1;
         jjstateSet[0] = startState;
         debugStream.println("   Starting NFA to match one of : " + jjKindsForStateVector(curLexState, jjstateSet, 0, 1));
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         int kind = 0x7fffffff;
         for (; ; ) {
             if (++jjround == 0x7fffffff)
@@ -720,15 +720,15 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 return curPos;
             debugStream.println("   Possible kinds of longer matches : " + jjKindsForStateVector(curLexState, jjstateSet, startsAt, i));
             try {
-                curChar = SimpleCharStream.readChar();
+                curChar = input_stream.readChar();
             } catch (java.io.IOException e) {
                 return curPos;
             }
-            debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+            debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         }
     }
 
-    static private int jjMoveStringLiteralDfa0_1() {
+    private int jjMoveStringLiteralDfa0_1() {
         switch (curChar) {
             case 33:
                 return jjMoveStringLiteralDfa1_1(0x1000L);
@@ -747,18 +747,18 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa1_1(long active0) {
+    private int jjMoveStringLiteralDfa1_1(long active0) {
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
             debugStream.println("   Currently matched the first " + (jjmatchedPos + 1) + " characters as a " + tokenImage[jjmatchedKind] + " token.");
         debugStream.println("   Possible string literal matches : { "
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 1;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 45:
                 return jjMoveStringLiteralDfa2_1(active0, 0x1000L);
@@ -777,7 +777,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa2_1(long old0, long active0) {
+    private int jjMoveStringLiteralDfa2_1(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 2;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -786,11 +786,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 2;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 45:
                 if ((active0 & 0x1000L) != 0L)
@@ -812,7 +812,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 3;
     }
 
-    static private int jjMoveStringLiteralDfa3_1(long old0, long active0) {
+    private int jjMoveStringLiteralDfa3_1(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 3;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -821,11 +821,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 3;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 69:
             case 101:
@@ -842,7 +842,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa4_1(long old0, long active0) {
+    private int jjMoveStringLiteralDfa4_1(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 4;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -851,11 +851,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 4;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 65:
             case 97:
@@ -872,7 +872,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 5;
     }
 
-    static private int jjMoveStringLiteralDfa5_1(long old0, long active0) {
+    private int jjMoveStringLiteralDfa5_1(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 5;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -881,11 +881,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 5;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 82:
             case 114:
@@ -899,7 +899,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa6_1(long old0, long active0) {
+    private int jjMoveStringLiteralDfa6_1(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 6;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -908,11 +908,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 6;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 73:
             case 105:
@@ -923,7 +923,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa7_1(long old0, long active0) {
+    private int jjMoveStringLiteralDfa7_1(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 7;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -932,11 +932,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 7;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 79:
             case 111:
@@ -950,7 +950,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa8_1(long old0, long active0) {
+    private int jjMoveStringLiteralDfa8_1(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 8;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -959,11 +959,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 8;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 58:
                 if ((active0 & 0x400L) != 0L)
@@ -979,7 +979,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 9;
     }
 
-    static private int jjMoveStringLiteralDfa9_1(long old0, long active0) {
+    private int jjMoveStringLiteralDfa9_1(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 9;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -988,11 +988,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 9;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 58:
                 if ((active0 & 0x200L) != 0L)
@@ -1005,7 +1005,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 10;
     }
 
-    static private int jjMoveStringLiteralDfa0_4() {
+    private int jjMoveStringLiteralDfa0_4() {
         switch (curChar) {
             case 77:
             case 109:
@@ -1019,18 +1019,18 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa1_4(long active0) {
+    private int jjMoveStringLiteralDfa1_4(long active0) {
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
             debugStream.println("   Currently matched the first " + (jjmatchedPos + 1) + " characters as a " + tokenImage[jjmatchedKind] + " token.");
         debugStream.println("   Possible string literal matches : { "
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 1;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 67:
             case 99:
@@ -1044,7 +1044,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa2_4(long old0, long active0) {
+    private int jjMoveStringLiteralDfa2_4(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 2;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -1053,11 +1053,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 2;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 69:
             case 101:
@@ -1071,7 +1071,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa3_4(long old0, long active0) {
+    private int jjMoveStringLiteralDfa3_4(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 3;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -1080,11 +1080,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 3;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 65:
             case 97:
@@ -1098,7 +1098,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa4_4(long old0, long active0) {
+    private int jjMoveStringLiteralDfa4_4(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 4;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -1107,11 +1107,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 4;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 58:
                 if ((active0 & 0x200000L) != 0L)
@@ -1127,7 +1127,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 5;
     }
 
-    static private int jjMoveStringLiteralDfa5_4(long old0, long active0) {
+    private int jjMoveStringLiteralDfa5_4(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 5;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -1136,11 +1136,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 5;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 82:
             case 114:
@@ -1151,7 +1151,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa6_4(long old0, long active0) {
+    private int jjMoveStringLiteralDfa6_4(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 6;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -1160,11 +1160,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 6;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 73:
             case 105:
@@ -1175,7 +1175,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa7_4(long old0, long active0) {
+    private int jjMoveStringLiteralDfa7_4(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 7;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -1184,11 +1184,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 7;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 79:
             case 111:
@@ -1199,7 +1199,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa8_4(long old0, long active0) {
+    private int jjMoveStringLiteralDfa8_4(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 8;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -1208,11 +1208,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 8;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 58:
                 if ((active0 & 0x400000L) != 0L)
@@ -1225,7 +1225,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 9;
     }
 
-    static private int jjMoveStringLiteralDfa0_2() {
+    private int jjMoveStringLiteralDfa0_2() {
         switch (curChar) {
             case 33:
                 return jjMoveStringLiteralDfa1_2(0x10000L);
@@ -1241,18 +1241,18 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa1_2(long active0) {
+    private int jjMoveStringLiteralDfa1_2(long active0) {
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
             debugStream.println("   Currently matched the first " + (jjmatchedPos + 1) + " characters as a " + tokenImage[jjmatchedKind] + " token.");
         debugStream.println("   Possible string literal matches : { "
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 1;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 45:
                 return jjMoveStringLiteralDfa2_2(active0, 0x10000L);
@@ -1268,7 +1268,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa2_2(long old0, long active0) {
+    private int jjMoveStringLiteralDfa2_2(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 2;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -1277,11 +1277,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 2;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 45:
                 if ((active0 & 0x10000L) != 0L)
@@ -1300,7 +1300,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 3;
     }
 
-    static private int jjMoveStringLiteralDfa3_2(long old0, long active0) {
+    private int jjMoveStringLiteralDfa3_2(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 3;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -1309,11 +1309,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 3;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 65:
             case 97:
@@ -1327,7 +1327,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa4_2(long old0, long active0) {
+    private int jjMoveStringLiteralDfa4_2(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 4;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -1336,11 +1336,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 4;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 58:
                 if ((active0 & 0x4000L) != 0L)
@@ -1356,7 +1356,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return 5;
     }
 
-    static private int jjMoveStringLiteralDfa5_2(long old0, long active0) {
+    private int jjMoveStringLiteralDfa5_2(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 5;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -1365,11 +1365,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 5;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 82:
             case 114:
@@ -1380,7 +1380,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa6_2(long old0, long active0) {
+    private int jjMoveStringLiteralDfa6_2(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 6;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -1389,11 +1389,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 6;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 73:
             case 105:
@@ -1404,7 +1404,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa7_2(long old0, long active0) {
+    private int jjMoveStringLiteralDfa7_2(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 7;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -1413,11 +1413,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 7;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 79:
             case 111:
@@ -1428,7 +1428,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         }
     }
 
-    static private int jjMoveStringLiteralDfa8_2(long old0, long active0) {
+    private int jjMoveStringLiteralDfa8_2(long old0, long active0) {
         if (((active0 &= old0)) == 0L)
             return 8;
         if (jjmatchedKind != 0 && jjmatchedKind != 0x7fffffff)
@@ -1437,11 +1437,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 +
                 jjKindsForBitVector(0, active0) + " } ");
         try {
-            curChar = SimpleCharStream.readChar();
+            curChar = input_stream.readChar();
         } catch (java.io.IOException e) {
             return 8;
         }
-        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
         switch (curChar) {
             case 58:
                 if ((active0 & 0x8000L) != 0L)
@@ -1457,14 +1457,14 @@ public class StoryParserTokenManager implements StoryParserConstants {
     /**
      * Reinitialise parser.
      */
-    static public void ReInit(SimpleCharStream stream) {
+    public void ReInit(SimpleCharStream stream) {
         jjmatchedPos = jjnewStateCnt = 0;
         curLexState = defaultLexState;
         input_stream = stream;
         ReInitRounds();
     }
 
-    static private void ReInitRounds() {
+    private void ReInitRounds() {
         int i;
         jjround = 0x80000001;
         for (i = 1; i-- > 0; )
@@ -1474,7 +1474,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
     /**
      * Reinitialise parser.
      */
-    static public void ReInit(SimpleCharStream stream, int lexState) {
+    public void ReInit(SimpleCharStream stream, int lexState) {
         ReInit(stream);
         SwitchTo(lexState);
     }
@@ -1482,14 +1482,14 @@ public class StoryParserTokenManager implements StoryParserConstants {
     /**
      * Switch to specified lex state.
      */
-    static public void SwitchTo(int lexState) {
+    public void SwitchTo(int lexState) {
         if (lexState >= 6 || lexState < 0)
             throw new TokenMgrError("Error: Ignoring invalid lexical state : " + lexState + ". State unchanged.", TokenMgrError.INVALID_LEXICAL_STATE);
         else
             curLexState = lexState;
     }
 
-    static protected Token jjFillToken() {
+    protected Token jjFillToken() {
         final Token t;
         final String curTokenImage;
         final int beginLine;
@@ -1497,11 +1497,11 @@ public class StoryParserTokenManager implements StoryParserConstants {
         final int beginColumn;
         final int endColumn;
         String im = jjstrLiteralImages[jjmatchedKind];
-        curTokenImage = (im == null) ? SimpleCharStream.GetImage() : im;
-        beginLine = SimpleCharStream.getBeginLine();
-        beginColumn = SimpleCharStream.getBeginColumn();
-        endLine = SimpleCharStream.getEndLine();
-        endColumn = SimpleCharStream.getEndColumn();
+        curTokenImage = (im == null) ? input_stream.GetImage() : im;
+        beginLine = input_stream.getBeginLine();
+        beginColumn = input_stream.getBeginColumn();
+        endLine = input_stream.getEndLine();
+        endColumn = input_stream.getEndColumn();
         t = Token.newToken(jjmatchedKind, curTokenImage);
 
         t.beginLine = beginLine;
@@ -1512,10 +1512,8 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return t;
     }
 
-    /**
-     * Get the next Token.
-     */
-    public static Token getNextToken() {
+    /** Get the next Token. */
+    public Token getNextToken() {
         Token specialToken = null;
         Token matchedToken;
         int curPos = 0;
@@ -1523,7 +1521,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         EOFLoop:
         for (; ; ) {
             try {
-                curChar = SimpleCharStream.BeginToken();
+                curChar = input_stream.BeginToken();
             } catch (java.io.IOException e) {
                 debugStream.println("Returning the <EOF> token.");
                 jjmatchedKind = 0;
@@ -1539,23 +1537,23 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 switch (curLexState) {
                     case 0:
                         try {
-                            SimpleCharStream.backup(0);
+                            input_stream.backup(0);
                             while (curChar <= 32 && (0x100002600L & (1L << curChar)) != 0L) {
                                 debugStream.println("<" + lexStateNames[curLexState] + ">" + "Skipping character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ")");
-                                curChar = SimpleCharStream.BeginToken();
+                                curChar = input_stream.BeginToken();
                             }
                         } catch (java.io.IOException e1) {
                             continue EOFLoop;
                         }
                         jjmatchedKind = 0x7fffffff;
                         jjmatchedPos = 0;
-                        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+                        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
                         curPos = jjMoveStringLiteralDfa0_0();
                         break;
                     case 1:
                         jjmatchedKind = 0x7fffffff;
                         jjmatchedPos = 0;
-                        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+                        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
                         curPos = jjMoveStringLiteralDfa0_1();
                         if (jjmatchedPos == 0 && jjmatchedKind > 13) {
                             debugStream.println("   Current character matched as a " + tokenImage[13] + " token.");
@@ -1565,7 +1563,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
                     case 2:
                         jjmatchedKind = 0x7fffffff;
                         jjmatchedPos = 0;
-                        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+                        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
                         curPos = jjMoveStringLiteralDfa0_2();
                         if (jjmatchedPos == 0 && jjmatchedKind > 17) {
                             debugStream.println("   Current character matched as a " + tokenImage[17] + " token.");
@@ -1575,7 +1573,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
                     case 3:
                         jjmatchedKind = 0x7fffffff;
                         jjmatchedPos = 0;
-                        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+                        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
                         curPos = jjMoveStringLiteralDfa0_3();
                         if (jjmatchedPos == 0 && jjmatchedKind > 19) {
                             debugStream.println("   Current character matched as a " + tokenImage[19] + " token.");
@@ -1585,7 +1583,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
                     case 4:
                         jjmatchedKind = 0x7fffffff;
                         jjmatchedPos = 0;
-                        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+                        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
                         curPos = jjMoveStringLiteralDfa0_4();
                         if (jjmatchedPos == 0 && jjmatchedKind > 23) {
                             debugStream.println("   Current character matched as a " + tokenImage[23] + " token.");
@@ -1595,7 +1593,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
                     case 5:
                         jjmatchedKind = 0x7fffffff;
                         jjmatchedPos = 0;
-                        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+                        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
                         curPos = jjMoveStringLiteralDfa0_5();
                         if (jjmatchedPos == 0 && jjmatchedKind > 28) {
                             debugStream.println("   Current character matched as a " + tokenImage[28] + " token.");
@@ -1606,9 +1604,9 @@ public class StoryParserTokenManager implements StoryParserConstants {
                 if (jjmatchedKind != 0x7fffffff) {
                     if (jjmatchedPos + 1 < curPos) {
                         debugStream.println("   Putting back " + (curPos - jjmatchedPos - 1) + " characters into the input stream.");
-                        SimpleCharStream.backup(curPos - jjmatchedPos - 1);
+                        input_stream.backup(curPos - jjmatchedPos - 1);
                     }
-                    debugStream.println("****** FOUND A " + tokenImage[jjmatchedKind] + " MATCH (" + TokenMgrError.addEscapes(new String(SimpleCharStream.GetSuffix(jjmatchedPos + 1))) + ") ******\n");
+                    debugStream.println("****** FOUND A " + tokenImage[jjmatchedKind] + " MATCH (" + TokenMgrError.addEscapes(new String(input_stream.GetSuffix(jjmatchedPos + 1))) + ") ******\n");
                     if ((jjtoToken[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L) {
                         matchedToken = jjFillToken();
                         matchedToken.specialToken = specialToken;
@@ -1638,22 +1636,22 @@ public class StoryParserTokenManager implements StoryParserConstants {
                     curPos = 0;
                     jjmatchedKind = 0x7fffffff;
                     try {
-                        curChar = SimpleCharStream.readChar();
-                        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int) curChar + ") at line " + SimpleCharStream.getEndLine() + " column " + SimpleCharStream.getEndColumn());
+                        curChar = input_stream.readChar();
+                        debugStream.println("<" + lexStateNames[curLexState] + ">" + "Current character : " + TokenMgrError.addEscapes(String.valueOf(curChar)) + " (" + (int)curChar + ") at line " + input_stream.getEndLine() + " column " + input_stream.getEndColumn());
                         continue;
                     } catch (java.io.IOException e1) {
                     }
                 }
-                int error_line = SimpleCharStream.getEndLine();
-                int error_column = SimpleCharStream.getEndColumn();
+                int error_line = input_stream.getEndLine();
+                int error_column = input_stream.getEndColumn();
                 String error_after = null;
                 boolean EOFSeen = false;
                 try {
-                    SimpleCharStream.readChar();
-                    SimpleCharStream.backup(1);
+                    input_stream.readChar();
+                    input_stream.backup(1);
                 } catch (java.io.IOException e1) {
                     EOFSeen = true;
-                    error_after = curPos <= 1 ? "" : SimpleCharStream.GetImage();
+                    error_after = curPos <= 1 ? "" : input_stream.GetImage();
                     if (curChar == '\n' || curChar == '\r') {
                         error_line++;
                         error_column = 0;
@@ -1661,15 +1659,15 @@ public class StoryParserTokenManager implements StoryParserConstants {
                         error_column++;
                 }
                 if (!EOFSeen) {
-                    SimpleCharStream.backup(1);
-                    error_after = curPos <= 1 ? "" : SimpleCharStream.GetImage();
+                    input_stream.backup(1);
+                    error_after = curPos <= 1 ? "" : input_stream.GetImage();
                 }
                 throw new TokenMgrError(EOFSeen, curLexState, error_line, error_column, error_after, curChar, TokenMgrError.LEXICAL_ERROR);
             }
         }
     }
 
-    protected static final String jjKindsForBitVector(int i, long vec) {
+    protected final String jjKindsForBitVector(int i, long vec) {
         String retVal = "";
         if (i == 0)
             kindCnt = 0;
@@ -1685,7 +1683,7 @@ public class StoryParserTokenManager implements StoryParserConstants {
         return retVal;
     }
 
-    protected static final String jjKindsForStateVector(int lexState, int[] vec, int start, int end) {
+    protected final String jjKindsForStateVector(int lexState, int[] vec, int start, int end) {
         boolean[] kindDone = new boolean[29];
         String retVal = "";
         int cnt = 0;
@@ -1711,72 +1709,72 @@ public class StoryParserTokenManager implements StoryParserConstants {
             return "{ " + retVal + " }";
     }
 
-    static void SkipLexicalActions(Token matchedToken) {
+    void SkipLexicalActions(Token matchedToken) {
         switch (jjmatchedKind) {
             case 21:
-                image.append(SimpleCharStream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                SimpleCharStream.backup(5);
+                image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+                input_stream.backup(5);
                 break;
             case 22:
-                image.append(SimpleCharStream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                SimpleCharStream.backup(9);
+                image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+                input_stream.backup(9);
                 break;
             default:
                 break;
         }
     }
 
-    static void TokenLexicalActions(Token matchedToken) {
+    void TokenLexicalActions(Token matchedToken) {
         switch (jjmatchedKind) {
             case 9:
-                image.append(SimpleCharStream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                SimpleCharStream.backup(10);
+                image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+                input_stream.backup(10);
                 break;
             case 10:
-                image.append(SimpleCharStream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                SimpleCharStream.backup(9);
+                image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+                input_stream.backup(9);
                 break;
             case 11:
-                image.append(SimpleCharStream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                SimpleCharStream.backup(5);
+                image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+                input_stream.backup(5);
                 break;
             case 14:
-                image.append(SimpleCharStream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                SimpleCharStream.backup(5);
+                image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+                input_stream.backup(5);
                 break;
             case 15:
-                image.append(SimpleCharStream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                SimpleCharStream.backup(9);
+                image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+                input_stream.backup(9);
                 break;
             case 24:
-                image.append(SimpleCharStream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                SimpleCharStream.backup(5);
+                image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+                input_stream.backup(5);
                 break;
             case 25:
-                image.append(SimpleCharStream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                SimpleCharStream.backup(9);
+                image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+                input_stream.backup(9);
                 break;
             default:
                 break;
         }
     }
 
-    static private void jjCheckNAdd(int state) {
+    private void jjCheckNAdd(int state) {
         if (jjrounds[state] != jjround) {
             jjstateSet[jjnewStateCnt++] = state;
             jjrounds[state] = jjround;
         }
     }
 
-    static private void jjAddStates(int start, int end) {
+    private void jjAddStates(int start, int end) {
         do {
             jjstateSet[jjnewStateCnt++] = jjnextStates[start];
         } while (start++ != end);
-    }
-
-    static private void jjCheckNAddTwoStates(int state1, int state2) {
-        jjCheckNAdd(state1);
-        jjCheckNAdd(state2);
-    }
+}
+private void jjCheckNAddTwoStates(int state1, int state2)
+{
+   jjCheckNAdd(state1);
+   jjCheckNAdd(state2);
+}
 
 }

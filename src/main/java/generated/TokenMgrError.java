@@ -39,9 +39,7 @@ public class TokenMgrError extends Error {
      */
     int errorCode;
 
-    /**
-     * No arg constructor.
-     */
+    /** No arg constructor. */
     public TokenMgrError() {
     }
 
@@ -58,7 +56,7 @@ public class TokenMgrError extends Error {
      */
     public TokenMgrError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar, int reason) {
         this(LexicalError(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar), reason);
-    }
+  }
 
   /*
    * Constructors of various flavors follow.
@@ -136,13 +134,13 @@ public class TokenMgrError extends Error {
      * You can also modify the body of this method to customize your error messages.
      * For example, cases like LOOP_DETECTED and INVALID_LEXICAL_STATE are not
      * of end-users concern, so you can return something like :
-     * <p>
-     * "Internal Error : Please file a bug report .... "
-     * <p>
+     *
+     *     "Internal Error : Please file a bug report .... "
+     *
      * from this method for such cases in the release version of your parser.
      */
-    public String getMessage() {
-        return super.getMessage();
-    }
+  public String getMessage() {
+    return super.getMessage();
+  }
 }
 /* JavaCC - OriginalChecksum=c77a10ac8fc321b98c2054f710a89ebf (do not edit this line) */
