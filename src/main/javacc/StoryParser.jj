@@ -48,14 +48,14 @@ PARSER_END(StoryParser)
 
 TOKEN:
 {
-    <META               : "Meta:"                > : IN_META
- |  <NARRATIVE             : "Narrative:"    >  : IN_NARRATIVE
- |  <SCENARIO             : "Scenario:"    >    :   IN_SCENARIO
- |  <GIVEN             : "Given"    >   :   IN_GIVEN
+    <META               : "Meta:"       >   : IN_META
+|   <NARRATIVE          : "Narrative:"  >   : IN_NARRATIVE
+|   <SCENARIO           : "Scenario:"   >   : IN_SCENARIO
+|   <GIVEN              : "Given"       >   : IN_GIVEN
 }
 
 
-<DEFAULT>
+<DEFAULT, IN_META>
 SKIP:
 {
     " "
@@ -78,11 +78,12 @@ TOKEN:
     }   :   DEFAULT
     |
     <IN_META_GIVEN  : "Given">
-            {
-                input_stream.backup(5);
-            }   :   DEFAULT
-        |
+    {
+    }   :   IN_GIVEN
+    |
     <IN_META_COMMENT    :   "!--"> : IN_COMMENT
+    |
+    <IGNORE : "@ignore">
     |
     <IN_META_ANY: ~[]>
 }
@@ -100,10 +101,8 @@ TOKEN:
         input_stream.backup(9);
     }   :   DEFAULT
     |
-    <IN_NARRATIVE_COMMENT  : "!--">
-            {
-            }   :   IN_COMMENT
-        |
+    <IN_NARRATIVE_COMMENT  : "!--">   :   IN_COMMENT
+    |
     <IN_NARRATIVE_ANY: ~[]>
 }
 
@@ -121,23 +120,25 @@ SPECIAL_TOKEN:
 
 MORE:
 {
-    "!--" { /*input_stream.backup(3);*/ } : IN_COMMENT
+    "!--" : IN_COMMENT
 }
 
 <IN_GIVEN>
 SPECIAL_TOKEN:
 {
-        <IN_GIVEN_META  : "Meta:">
+    <IN_GIVEN_META  : "Meta:">
+    {
+        input_stream.backup(5);
+    }   :   DEFAULT
+    |
+    <IN_GIVEN_SCENARIO  : "Scenario:">
         {
-            input_stream.backup(5);
+            input_stream.backup(9);
         }   :   DEFAULT
-        |
-        <IN_GIVEN_SCENARIO  : "Scenario:">
-            {
-                input_stream.backup(9);
-            }   :   DEFAULT
-        |
-        <IN_GIVEN_ANY: ~[]>
+}
+<IN_GIVEN> SKIP:
+{
+    <~[]>
 }
 
 
@@ -188,20 +189,28 @@ public Story parseStory( final String fileName) :
 }
 
 
-private void Meta():
+private boolean Meta():
 {
     Token token;
-    StringBuilder builder = new StringBuilder();
+    boolean isIgnored = false;
 }
 {
     <META>
+    (
         (
-            token = <IN_META_ANY>
-            { builder.append(token.image); }
-        )*
-    (<IN_META_NARRATIVE>|<IN_META_SCENARIO>|<IN_META_COMMENT>|<EOF>)
+            <IGNORE>
+            { isIgnored = true; }
+        )
+        |
+        <IN_META_ANY>
+    )*
 
-    {System.out.printf("Meta: [%s]\n", builder.toString());}
+    (<IN_META_NARRATIVE>|<IN_META_SCENARIO>|<IN_META_COMMENT>|<IN_META_GIVEN>|<EOF>)
+
+    {
+        System.out.printf("Meta: [ignored - %s]\n", isIgnored);
+        return isIgnored;
+    }
 }
 
 private String Narrative():
@@ -238,11 +247,24 @@ private void Scenario( final Collection<Scenario> scenarios ):
         { builder.append(token.image); }
     )+
 
-    (<IN_SCENARIO_META>|<IN_SCENARIO_SCENARIO>|<IN_SCENARIO_COMMENT>|<IN_SCENARIO_GIVEN>|<EOF>)
+    (
+        (<IN_SCENARIO_META>{ isIgnored = Meta(); })
+        |
+        <IN_SCENARIO_SCENARIO>
+        |
+        <IN_SCENARIO_COMMENT>
+        |
+        <IN_SCENARIO_GIVEN>
+        |
+        <EOF>
+    )
 
     {
         System.out.printf("Scenario: [%s]\n", builder.toString());
-        scenarios.add(new Scenario(builder.toString(),relatedJiras, isIgnored ));
+        if(isIgnored)
+        {
+            scenarios.add(new Scenario(builder.toString(),relatedJiras, isIgnored ));
+        }
     }
 }
 

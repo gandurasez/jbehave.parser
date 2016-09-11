@@ -1,4 +1,7 @@
-
+!-- afsafasfasfasfas
+!-- afsafasfasfasfas
+!-- afsafasfasfasfas
+!-- afsafasfasfasfas
 
 Meta:
 
@@ -24,21 +27,14 @@ Given a system state
 When I do something
 Then system is in a different state
 
-
 Scenario: scenario description2
 Meta:
 @ignore
-Given a system state
-When I do something
-Then system is in a different state
 
 
 Scenario: scenario description3
 Meta:
 @ignore
-Given a system state
-When I do something
-Then system is in a different state
 
 
 Scenario: scenario description4

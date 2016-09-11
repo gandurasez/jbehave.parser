@@ -47,59 +47,59 @@ public interface StoryParserConstants {
     /**
      * RegularExpression Id.
      */
-    int IN_META_ANY = 13;
+    int IGNORE = 13;
     /**
      * RegularExpression Id.
      */
-    int IN_NARRATIVE_META = 14;
+    int IN_META_ANY = 14;
     /**
      * RegularExpression Id.
      */
-    int IN_NARRATIVE_SCENARIO = 15;
+    int IN_NARRATIVE_META = 15;
     /**
      * RegularExpression Id.
      */
-    int IN_NARRATIVE_COMMENT = 16;
+    int IN_NARRATIVE_SCENARIO = 16;
     /**
      * RegularExpression Id.
      */
-    int IN_NARRATIVE_ANY = 17;
+    int IN_NARRATIVE_COMMENT = 17;
     /**
      * RegularExpression Id.
      */
-    int COMMENT_END = 18;
+    int IN_NARRATIVE_ANY = 18;
     /**
      * RegularExpression Id.
      */
-    int IN_GIVEN_META = 21;
+    int COMMENT_END = 19;
     /**
      * RegularExpression Id.
      */
-    int IN_GIVEN_SCENARIO = 22;
+    int IN_GIVEN_META = 22;
     /**
      * RegularExpression Id.
      */
-    int IN_GIVEN_ANY = 23;
+    int IN_GIVEN_SCENARIO = 23;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_META = 24;
+    int IN_SCENARIO_META = 25;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_SCENARIO = 25;
+    int IN_SCENARIO_SCENARIO = 26;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_COMMENT = 26;
+    int IN_SCENARIO_COMMENT = 27;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_GIVEN = 27;
+    int IN_SCENARIO_GIVEN = 28;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_ANY = 28;
+    int IN_SCENARIO_ANY = 29;
 
     /**
      * Lexical state.
@@ -126,34 +126,33 @@ public interface StoryParserConstants {
      */
     int IN_SCENARIO = 5;
 
-    /**
-     * Literal token values.
-     */
-    String[] tokenImage = {
-            "<EOF>",
+    /** Literal token values. */
+  String[] tokenImage = {
+    "<EOF>",
             "\"Meta:\"",
             "\"Narrative:\"",
-            "\"Scenario:\"",
-            "\"Given\"",
+    "\"Scenario:\"",
+    "\"Given\"",
             "\" \"",
             "\"\\t\"",
             "\"\\n\"",
-            "\"\\r\"",
-            "\"Narrative:\"",
-            "\"Scenario:\"",
-            "\"Given\"",
-            "\"!--\"",
-            "<IN_META_ANY>",
-            "\"Meta:\"",
-            "\"Scenario:\"",
+    "\"\\r\"",
+    "\"Narrative:\"",
+    "\"Scenario:\"",
+    "\"Given\"",
+    "\"!--\"",
+    "\"@ignore\"",
+    "<IN_META_ANY>",
+    "\"Meta:\"",
+    "\"Scenario:\"",
     "\"!--\"",
     "<IN_NARRATIVE_ANY>",
     "<COMMENT_END>",
-    "<token of kind 19>",
+    "<token of kind 20>",
     "\"!--\"",
     "\"Meta:\"",
     "\"Scenario:\"",
-    "<IN_GIVEN_ANY>",
+    "<token of kind 24>",
     "\"Meta:\"",
     "\"Scenario:\"",
     "\"!--\"",
