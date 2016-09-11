@@ -125,6 +125,24 @@ SPECIAL_TOKEN:
     <M_COMMENT_END    : ["\r","\n"]>  : IN_META
 }
 
+<IN_SCENARIO_COMMENT>
+TOKEN:
+{
+    <JIRA_ID    :   <PRPJECT_ID>"-"(<NUMBER>)+ >
+    |
+        <#PRPJECT_ID    :   "CPV">
+        |
+        <#NUMBER    :   ["0"-"9"]>
+    |
+    <IN_SCENARIO_COMMENT_ANY: ~["\r","\n"]>
+}
+
+<IN_SCENARIO_COMMENT>
+SPECIAL_TOKEN:
+{
+    <IN_SCENARIO_COMMENT_END    : ["\r","\n"]>  : IN_SCENARIO
+}
+
 <IN_COMMENT,IN_NARRATIVE_COMMENT, IN_META_COMMENT> MORE:
 {
     < ~[] >
@@ -144,9 +162,9 @@ SPECIAL_TOKEN:
     }   :   DEFAULT
     |
     <IN_GIVEN_SCENARIO  : "Scenario:">
-        {
-            input_stream.backup(9);
-        }   :   DEFAULT
+    {
+        input_stream.backup(9);
+    }   :   DEFAULT
 }
 <IN_GIVEN> SKIP:
 {
@@ -167,15 +185,20 @@ TOKEN:
         input_stream.backup(9);
     }   :   DEFAULT
     |
-    <IN_SCENARIO_COMMENT  : "!--">
+    <SCENARIO_COMMENT  : ("!--")|("//")>
     {
-    }   :   IN_COMMENT
+    }   :   IN_SCENARIO_COMMENT
     |
     <IN_SCENARIO_GIVEN  : "Given">
     {
     }   :   IN_GIVEN
     |
-    <IN_SCENARIO_ANY: ~[]>
+    <IN_SCENARIO_ANY: ~["\r","\n"]>
+}
+
+<IN_SCENARIO> SPECIAL_TOKEN:
+{
+    "\n"|"\r"   : DEFAULT
 }
 
 
@@ -254,7 +277,7 @@ private void Scenario( final Collection<Scenario> scenarios ):
 {
     Token token;
     final StringBuilder builder = new StringBuilder();
-    final Collection<String> relatedJiras = new ArrayList();
+    final Set<String> relatedJiras = new LinkedHashSet();
     boolean isIgnored = false;
 }
 {
@@ -264,12 +287,13 @@ private void Scenario( final Collection<Scenario> scenarios ):
         { builder.append(token.image); }
     )+
 
+
+    ( ScenarioComment(relatedJiras) )*
+
     (
         (<IN_SCENARIO_META>{ isIgnored = Meta(); })
         |
         <IN_SCENARIO_SCENARIO>
-        |
-        <IN_SCENARIO_COMMENT>
         |
         <IN_SCENARIO_GIVEN>
         |
@@ -283,6 +307,20 @@ private void Scenario( final Collection<Scenario> scenarios ):
             scenarios.add(new Scenario(builder.toString(),relatedJiras, isIgnored ));
         }
     }
+}
+
+private void ScenarioComment( final Set<String> relatedJiras ):
+{
+    Token token;
+}
+{
+    <SCENARIO_COMMENT>
+    ((
+        token = <JIRA_ID>
+        { relatedJiras.add(token.image); }
+    )
+    |
+    <IN_SCENARIO_COMMENT_ANY>)*
 }
 
 

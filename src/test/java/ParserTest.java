@@ -162,4 +162,54 @@ public class ParserTest {
         checkScenario(itr.next(), "scenario description3");
         checkScenario(itr.next(), "scenario description4");
     }
+
+    @Test
+    public void test12() {
+        final Story story = getStory("test12.story");
+        checkStory(story,
+                "As a user\n" +
+                        "I want to perform an action\n" +
+                        "So that I can achieve a business goal",
+                s -> s.size() == 4);
+
+        final Iterator<Scenario> itr = story.getScenarios().iterator();
+        checkScenario(itr.next(), "scenario description1");
+        checkScenario(itr.next(), "scenario description2", "CPV-1234");
+        checkScenario(itr.next(), "scenario description3",
+                "CPV-1234", "CPV-5678");
+        checkScenario(itr.next(), "scenario description4", "CPV-1234");
+    }
+
+    @Test
+    public void test13() {
+        final Story story = getStory("test13.story");
+        checkStory(story,
+                "As a user\n" +
+                        "I want to perform an action\n" +
+                        "So that I can achieve a business goal",
+                s -> s.size() == 4);
+
+        final Iterator<Scenario> itr = story.getScenarios().iterator();
+        checkScenario(itr.next(), "scenario description1");
+        checkScenario(itr.next(), "scenario description2", "CPV-1234");
+        checkScenario(itr.next(), "scenario description3",
+                "CPV-1234", "CPV-5678", "CPV-9871");
+        checkScenario(itr.next(), "scenario description4",
+                "CPV-1234", "CPV-5678", "CPV-9871");
+    }
+
+    @Test
+    public void test14() {
+        final Story story = getStory("test14.story");
+        checkStory(story,
+                "As a user\n" +
+                        "I want to perform an action\n" +
+                        "So that I can achieve a business goal",
+                s -> s.size() == 2);
+
+        final Iterator<Scenario> itr = story.getScenarios().iterator();
+        checkScenario(itr.next(), "scenario description2", "CPV-1234");
+        checkScenario(itr.next(), "scenario description4",
+                "CPV-1234", "CPV-5678", "CPV-9871");
+    }
 }

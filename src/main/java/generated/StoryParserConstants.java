@@ -83,31 +83,51 @@ public interface StoryParserConstants {
     /**
      * RegularExpression Id.
      */
-    int IN_GIVEN_META = 24;
+    int JIRA_ID = 22;
     /**
      * RegularExpression Id.
      */
-    int IN_GIVEN_SCENARIO = 25;
+    int PRPJECT_ID = 23;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_META = 27;
+    int NUMBER = 24;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_SCENARIO = 28;
+    int IN_SCENARIO_COMMENT_ANY = 25;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_COMMENT = 29;
+    int IN_SCENARIO_COMMENT_END = 26;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_GIVEN = 30;
+    int IN_GIVEN_META = 29;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_ANY = 31;
+    int IN_GIVEN_SCENARIO = 30;
+    /**
+     * RegularExpression Id.
+     */
+    int IN_SCENARIO_META = 32;
+    /**
+     * RegularExpression Id.
+     */
+    int IN_SCENARIO_SCENARIO = 33;
+    /**
+     * RegularExpression Id.
+     */
+    int SCENARIO_COMMENT = 34;
+    /**
+     * RegularExpression Id.
+     */
+    int IN_SCENARIO_GIVEN = 35;
+    /**
+     * RegularExpression Id.
+     */
+    int IN_SCENARIO_ANY = 36;
 
     /**
      * Lexical state.
@@ -127,45 +147,54 @@ public interface StoryParserConstants {
     int IN_NARRATIVE_COMMENT = 4;
   /** Lexical state. */
   int IN_META_COMMENT = 5;
-    /** Lexical state. */
-  int IN_GIVEN = 6;
   /** Lexical state. */
-  int IN_SCENARIO = 7;
+  int IN_SCENARIO_COMMENT = 6;
+  /** Lexical state. */
+  int IN_GIVEN = 7;
+  /** Lexical state. */
+  int IN_SCENARIO = 8;
 
   /** Literal token values. */
   String[] tokenImage = {
     "<EOF>",
-    "\"Meta:\"",
-    "\"Narrative:\"",
+          "\"Meta:\"",
+          "\"Narrative:\"",
           "\"Scenario:\"",
           "\"Given\"",
           "\" \"",
-    "\"\\t\"",
-    "\"\\n\"",
-    "\"\\r\"",
+          "\"\\t\"",
+          "\"\\n\"",
+          "\"\\r\"",
           "\"Narrative:\"",
-          "\"Scenario:\"",
+    "\"Scenario:\"",
     "\"Given\"",
-    "\"!--\"",
-    "\"@ignore\"",
+          "\"!--\"",
+          "\"@ignore\"",
     "<IN_META_ANY>",
     "\"Meta:\"",
-    "\"Scenario:\"",
+          "\"Scenario:\"",
     "\"!--\"",
     "<IN_NARRATIVE_ANY>",
-    "<COMMENT_END>",
-    "<N_COMMENT_END>",
+          "<COMMENT_END>",
+          "<N_COMMENT_END>",
     "<M_COMMENT_END>",
-    "<token of kind 22>",
+    "<JIRA_ID>",
+    "\"CPV\"",
+    "<NUMBER>",
+    "<IN_SCENARIO_COMMENT_ANY>",
+    "<IN_SCENARIO_COMMENT_END>",
+    "<token of kind 27>",
     "\"!--\"",
     "\"Meta:\"",
     "\"Scenario:\"",
-    "<token of kind 26>",
+    "<token of kind 31>",
     "\"Meta:\"",
     "\"Scenario:\"",
-    "\"!--\"",
+    "<SCENARIO_COMMENT>",
     "\"Given\"",
     "<IN_SCENARIO_ANY>",
+    "\"\\n\"",
+    "\"\\r\"",
   };
 
 }

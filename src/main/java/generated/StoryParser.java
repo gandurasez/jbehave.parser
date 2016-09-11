@@ -8,15 +8,19 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public final class StoryParser implements StoryParserConstants {
   static private int[] jj_la1_0;
+  static private int[] jj_la1_1;
 
   static {
     jj_la1_init_0();
+    jj_la1_init_1();
   }
 
-  final private int[] jj_la1 = new int[11];
+  final private int[] jj_la1 = new int[14];
   /**
    * Generated Token Manager.
    */
@@ -45,7 +49,7 @@ public final class StoryParser implements StoryParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 14; i++) jj_la1[i] = -1;
   }
   /** Constructor. */
   public StoryParser(java.io.Reader stream) {
@@ -54,16 +58,15 @@ public final class StoryParser implements StoryParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 14; i++) jj_la1[i] = -1;
   }
-
   /** Constructor with generated Token Manager. */
   public StoryParser(StoryParserTokenManager tm) {
     token_source = tm;
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 14; i++) jj_la1[i] = -1;
   }
 
     public static Story parse(final File file) {
@@ -85,7 +88,11 @@ public final class StoryParser implements StoryParserConstants {
     }
 
   private static void jj_la1_init_0() {
-    jj_la1_0 = new int[]{0x2, 0x8, 0x1, 0x7000, 0x7000, 0xe01, 0x60000, 0x60000, 0x18001, 0x80000000, 0x78000001,};
+    jj_la1_0 = new int[]{0x2, 0x8, 0x1, 0x7000, 0x7000, 0xe01, 0x60000, 0x60000, 0x18001, 0x0, 0x0, 0x1, 0x2400000,0x2400000,};
+  }
+
+  private static void jj_la1_init_1() {
+    jj_la1_1 = new int[]{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10, 0x4, 0xb, 0x0,0x0,};
    }
 
   final public Story parseStory(final String fileName) throws ParseException {
@@ -234,7 +241,7 @@ public final class StoryParser implements StoryParserConstants {
   final private void Scenario(final Collection<Scenario> scenarios) throws ParseException {
     Token token;
     final StringBuilder builder = new StringBuilder();
-    final Collection<String> relatedJiras = new ArrayList();
+    final Set<String> relatedJiras = new LinkedHashSet();
     boolean isIgnored = false;
     jj_consume_token(SCENARIO);
     label_4:
@@ -249,6 +256,17 @@ public final class StoryParser implements StoryParserConstants {
         break label_4;
       }
     }
+    label_5:
+    while (true) {
+      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        case SCENARIO_COMMENT:
+          break;
+        default:
+          jj_la1[10] = jj_gen;
+          break label_5;
+      }
+      ScenarioComment(relatedJiras);
+    }
     switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
       case IN_SCENARIO_META:
         jj_consume_token(IN_SCENARIO_META);
@@ -257,9 +275,6 @@ public final class StoryParser implements StoryParserConstants {
       case IN_SCENARIO_SCENARIO:
         jj_consume_token(IN_SCENARIO_SCENARIO);
         break;
-      case IN_SCENARIO_COMMENT:
-        jj_consume_token(IN_SCENARIO_COMMENT);
-        break;
       case IN_SCENARIO_GIVEN:
         jj_consume_token(IN_SCENARIO_GIVEN);
         break;
@@ -267,14 +282,43 @@ public final class StoryParser implements StoryParserConstants {
         jj_consume_token(0);
         break;
       default:
-        jj_la1[10] = jj_gen;
+        jj_la1[11] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
     }
     System.out.printf("Scenario: [%s]\u005cn", builder.toString());
     if (isIgnored) {
-      scenarios.add(new Scenario(builder.toString(), relatedJiras, isIgnored ));
-        }
+      scenarios.add(new Scenario(builder.toString(), relatedJiras, isIgnored));
+    }
+  }
+
+  final private void ScenarioComment(final Set<String> relatedJiras) throws ParseException {
+    Token token;
+    jj_consume_token(SCENARIO_COMMENT);
+    label_6:
+    while (true) {
+      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        case JIRA_ID:
+        case IN_SCENARIO_COMMENT_ANY:
+          break;
+        default:
+          jj_la1[12] = jj_gen;
+          break label_6;
+      }
+      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        case JIRA_ID:
+          token = jj_consume_token(JIRA_ID);
+          relatedJiras.add(token.image);
+          break;
+        case IN_SCENARIO_COMMENT_ANY:
+          jj_consume_token(IN_SCENARIO_COMMENT_ANY);
+        break;
+        default:
+          jj_la1[13] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    }
   }
 
   /** Reinitialise. */
@@ -292,7 +336,7 @@ public final class StoryParser implements StoryParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 14; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -302,7 +346,7 @@ public final class StoryParser implements StoryParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 14; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -311,7 +355,7 @@ public final class StoryParser implements StoryParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 14; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -357,21 +401,24 @@ public final class StoryParser implements StoryParserConstants {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[32];
+    boolean[] la1tokens = new boolean[39];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 11; i++) {
+    for (int i = 0; i < 14; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1 <<j)) != 0) {
             la1tokens[j] = true;
           }
+          if ((jj_la1_1[i] & (1 << j)) != 0) {
+            la1tokens[32 + j] = true;
+          }
         }
       }
     }
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < 39; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
