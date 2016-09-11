@@ -63,7 +63,7 @@ public interface StoryParserConstants {
     /**
      * RegularExpression Id.
      */
-    int IN_NARRATIVE_COMMENT = 17;
+    int NARRATIVE_COMMENT = 17;
     /**
      * RegularExpression Id.
      */
@@ -75,70 +75,68 @@ public interface StoryParserConstants {
     /**
      * RegularExpression Id.
      */
-    int IN_GIVEN_META = 22;
+    int N_COMMENT_END = 20;
     /**
      * RegularExpression Id.
      */
-    int IN_GIVEN_SCENARIO = 23;
+    int IN_GIVEN_META = 23;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_META = 25;
+    int IN_GIVEN_SCENARIO = 24;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_SCENARIO = 26;
+    int IN_SCENARIO_META = 26;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_COMMENT = 27;
+    int IN_SCENARIO_SCENARIO = 27;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_GIVEN = 28;
+    int IN_SCENARIO_COMMENT = 28;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_ANY = 29;
+    int IN_SCENARIO_GIVEN = 29;
+    /**
+     * RegularExpression Id.
+     */
+    int IN_SCENARIO_ANY = 30;
 
     /**
      * Lexical state.
      */
     int DEFAULT = 0;
+    /** Lexical state. */
+  int IN_META = 1;
+  /** Lexical state. */
+  int IN_NARRATIVE = 2;
+    /** Lexical state. */
+  int IN_COMMENT = 3;
     /**
      * Lexical state.
      */
-    int IN_META = 1;
-    /**
-     * Lexical state.
-     */
-    int IN_NARRATIVE = 2;
-    /**
-     * Lexical state.
-     */
-    int IN_COMMENT = 3;
-    /**
-     * Lexical state.
-     */
-    int IN_GIVEN = 4;
-    /**
-     * Lexical state.
-     */
-    int IN_SCENARIO = 5;
+    int IN_NARRATIVE_COMMENT = 4;
+  /** Lexical state. */
+  int IN_GIVEN = 5;
+  /** Lexical state. */
+  int IN_SCENARIO = 6;
 
-    /** Literal token values. */
+  /** Literal token values. */
   String[] tokenImage = {
     "<EOF>",
-            "\"Meta:\"",
-            "\"Narrative:\"",
-    "\"Scenario:\"",
-    "\"Given\"",
-            "\" \"",
-            "\"\\t\"",
-            "\"\\n\"",
+    "\"Meta:\"",
+    "\"Narrative:\"",
+          "\"Scenario:\"",
+          "\"Given\"",
+          "\" \"",
+    "\"\\t\"",
+    "\"\\n\"",
     "\"\\r\"",
     "\"Narrative:\"",
-    "\"Scenario:\"",
+          "\"Scenario:\"",
     "\"Given\"",
     "\"!--\"",
     "\"@ignore\"",
@@ -148,11 +146,12 @@ public interface StoryParserConstants {
     "\"!--\"",
     "<IN_NARRATIVE_ANY>",
     "<COMMENT_END>",
-    "<token of kind 20>",
+    "<N_COMMENT_END>",
+    "<token of kind 21>",
     "\"!--\"",
     "\"Meta:\"",
     "\"Scenario:\"",
-    "<token of kind 24>",
+    "<token of kind 25>",
     "\"Meta:\"",
     "\"Scenario:\"",
     "\"!--\"",

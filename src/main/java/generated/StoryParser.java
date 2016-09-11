@@ -16,18 +16,14 @@ public final class StoryParser implements StoryParserConstants {
     jj_la1_init_0();
   }
 
-  final private int[] jj_la1 = new int[10];
+  final private int[] jj_la1 = new int[11];
   /**
    * Generated Token Manager.
    */
   public StoryParserTokenManager token_source;
-  /**
-   * Current token.
-   */
+  /** Current token. */
   public Token token;
-  /**
-   * Next token.
-   */
+  /** Next token. */
   public Token jj_nt;
   SimpleCharStream jj_input_stream;
   private int jj_ntk;
@@ -36,50 +32,41 @@ public final class StoryParser implements StoryParserConstants {
   private int[] jj_expentry;
   private int jj_kind = -1;
 
-  /**
-   * Constructor with InputStream.
-   */
+  /** Constructor with InputStream. */
   public StoryParser(java.io.InputStream stream) {
     this(stream, null);
   }
 
-  /**
-   * Constructor with InputStream and supplied encoding
-   */
+  /** Constructor with InputStream and supplied encoding */
   public StoryParser(java.io.InputStream stream, String encoding) {
     try {
       jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1);
     } catch (java.io.UnsupportedEncodingException e) {
-      throw new RuntimeException(e);
-    }
+      throw new RuntimeException(e); }
     token_source = new StoryParserTokenManager(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
   }
 
-  /**
-   * Constructor.
-   */
+  /** Constructor. */
   public StoryParser(java.io.Reader stream) {
     jj_input_stream = new SimpleCharStream(stream, 1, 1);
     token_source = new StoryParserTokenManager(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
   }
 
-  /**
-   * Constructor with generated Token Manager.
-   */
+  /** Constructor with generated Token Manager. */
   public StoryParser(StoryParserTokenManager tm) {
     token_source = tm;
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
   }
 
     public static Story parse(final File file) {
@@ -91,20 +78,19 @@ public final class StoryParser implements StoryParserConstants {
         } catch(Exception e) {
             throw new IllegalArgumentException("Unable to parse", e);
         }
-        finally
-        {
-            if( reader!=null ) {
-              try {
-                reader.close();
-                } catch (Exception ignored) {
-              }
+        finally {
+          if (reader != null) {
+            try {
+              reader.close();
+            } catch (Exception ignored) {
+            }
             }
         }
     }
 
   private static void jj_la1_init_0() {
-    jj_la1_0 = new int[]{0x2, 0x8, 0x1, 0x6000, 0x6000, 0x1e01, 0x40000, 0x38001, 0x20000000, 0x1e000001,};
-  }
+    jj_la1_0 = new int[]{0x2, 0x8, 0x1, 0x6000, 0x6000, 0x1e01, 0x60000, 0x60000, 0x18001, 0x40000000, 0x3c000001,};
+   }
 
   final public Story parseStory(final String fileName) throws ParseException {
     Token narrative;
@@ -140,8 +126,7 @@ public final class StoryParser implements StoryParserConstants {
         jj_la1[2] = jj_gen;
     }
     {
-      if (true) return new Story(storyDesc, scenarios);
-    }
+      if (true) return new Story(storyDesc, scenarios);}
     throw new Error("Missing return statement in function");
   }
 
@@ -166,11 +151,11 @@ public final class StoryParser implements StoryParserConstants {
           break;
         case IN_META_ANY:
           jj_consume_token(IN_META_ANY);
-          break;
+        break;
         default:
           jj_la1[4] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
+        jj_consume_token(-1);
+        throw new ParseException();
       }
     }
     switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
@@ -196,8 +181,7 @@ public final class StoryParser implements StoryParserConstants {
     }
     System.out.printf("Meta: [ignored - %s]\u005cn", isIgnored);
     {
-      if (true) return isIgnored;
-    }
+      if (true) return isIgnored;}
     throw new Error("Missing return statement in function");
   }
 
@@ -208,14 +192,26 @@ public final class StoryParser implements StoryParserConstants {
     label_3:
     while (true) {
       switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        case NARRATIVE_COMMENT:
         case IN_NARRATIVE_ANY:
           break;
         default:
           jj_la1[6] = jj_gen;
           break label_3;
       }
-      token = jj_consume_token(IN_NARRATIVE_ANY);
-      builder.append(token.image);
+      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        case NARRATIVE_COMMENT:
+          jj_consume_token(NARRATIVE_COMMENT);
+          break;
+        case IN_NARRATIVE_ANY:
+          token = jj_consume_token(IN_NARRATIVE_ANY);
+          builder.append(token.image);
+        break;
+      default:
+        jj_la1[7] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
     }
     switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
       case IN_NARRATIVE_META:
@@ -224,21 +220,17 @@ public final class StoryParser implements StoryParserConstants {
       case IN_NARRATIVE_SCENARIO:
         jj_consume_token(IN_NARRATIVE_SCENARIO);
         break;
-      case IN_NARRATIVE_COMMENT:
-        jj_consume_token(IN_NARRATIVE_COMMENT);
-        break;
       case 0:
         jj_consume_token(0);
         break;
       default:
-        jj_la1[7] = jj_gen;
+        jj_la1[8] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
     System.out.printf("Narrative: [%s]\u005cn", builder.toString());
     {
-      if (true) return builder.toString();
-    }
+      if (true) return builder.toString();}
     throw new Error("Missing return statement in function");
   }
 
@@ -254,10 +246,10 @@ public final class StoryParser implements StoryParserConstants {
       builder.append(token.image);
       switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
         case IN_SCENARIO_ANY:
-          break;
-        default:
-          jj_la1[8] = jj_gen;
-          break label_4;
+        break;
+      default:
+        jj_la1[9] = jj_gen;
+        break label_4;
       }
     }
     switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
@@ -278,14 +270,14 @@ public final class StoryParser implements StoryParserConstants {
         jj_consume_token(0);
         break;
       default:
-        jj_la1[9] = jj_gen;
+        jj_la1[10] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
     }
     System.out.printf("Scenario: [%s]\u005cn", builder.toString());
     if (isIgnored) {
       scenarios.add(new Scenario(builder.toString(), relatedJiras, isIgnored));
-    }
+        }
   }
 
   /** Reinitialise. */
@@ -293,43 +285,36 @@ public final class StoryParser implements StoryParserConstants {
     ReInit(stream, null);
   }
 
-  /**
-   * Reinitialise.
-   */
+  /** Reinitialise. */
   public void ReInit(java.io.InputStream stream, String encoding) {
     try {
       jj_input_stream.ReInit(stream, encoding, 1, 1);
     } catch (java.io.UnsupportedEncodingException e) {
-      throw new RuntimeException(e);
-    }
+      throw new RuntimeException(e); }
     token_source.ReInit(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
   }
 
-  /**
-   * Reinitialise.
-   */
+  /** Reinitialise. */
   public void ReInit(java.io.Reader stream) {
     jj_input_stream.ReInit(stream, 1, 1);
     token_source.ReInit(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
   }
 
-  /**
-   * Reinitialise.
-   */
+  /** Reinitialise. */
   public void ReInit(StoryParserTokenManager tm) {
     token_source = tm;
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -346,9 +331,7 @@ public final class StoryParser implements StoryParserConstants {
     throw generateParseException();
   }
 
-  /**
-   * Get the next Token.
-   */
+  /** Get the next Token. */
   final public Token getNextToken() {
     if (token.next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
@@ -357,9 +340,7 @@ public final class StoryParser implements StoryParserConstants {
     return token;
   }
 
-  /**
-   * Get the specific Token.
-   */
+  /** Get the specific Token. */
   final public Token getToken(int index) {
     Token t = token;
     for (int i = 0; i < index; i++) {
@@ -376,26 +357,24 @@ public final class StoryParser implements StoryParserConstants {
       return (jj_ntk = jj_nt.kind);
   }
 
-  /**
-   * Generate ParseException.
-   */
+  /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[30];
+    boolean[] la1tokens = new boolean[31];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 11; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
-          if ((jj_la1_0[i] & (1 << j)) != 0) {
+          if ((jj_la1_0[i] & (1 <<j)) != 0) {
             la1tokens[j] = true;
           }
         }
       }
     }
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < 31; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

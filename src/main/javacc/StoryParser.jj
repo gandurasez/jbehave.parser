@@ -101,7 +101,7 @@ TOKEN:
         input_stream.backup(9);
     }   :   DEFAULT
     |
-    <IN_NARRATIVE_COMMENT  : "!--">   :   IN_COMMENT
+    <NARRATIVE_COMMENT  : "!--">   :   IN_NARRATIVE_COMMENT
     |
     <IN_NARRATIVE_ANY: ~[]>
 }
@@ -113,7 +113,13 @@ SPECIAL_TOKEN:
     <COMMENT_END    : ["\r","\n"]>  : DEFAULT
 }
 
-<IN_COMMENT> MORE:
+<IN_NARRATIVE_COMMENT>
+SPECIAL_TOKEN:
+{
+    <N_COMMENT_END    : ["\r","\n"]>  : IN_NARRATIVE
+}
+
+<IN_COMMENT,IN_NARRATIVE_COMMENT> MORE:
 {
     < ~[] >
 }
@@ -221,11 +227,14 @@ private String Narrative():
 {
     <NARRATIVE>
     (
+        <NARRATIVE_COMMENT>
+        |
+        (
         token = <IN_NARRATIVE_ANY>
-        { builder.append(token.image); }
+        { builder.append(token.image); })
     )*
 
-    (<IN_NARRATIVE_META>|<IN_NARRATIVE_SCENARIO>|<IN_NARRATIVE_COMMENT>|<EOF>)
+    (<IN_NARRATIVE_META>|<IN_NARRATIVE_SCENARIO>|<EOF>)
 
     {
         System.out.printf("Narrative: [%s]\n", builder.toString());
