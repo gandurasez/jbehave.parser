@@ -81,7 +81,7 @@ TOKEN:
     {
     }   :   IN_GIVEN
     |
-    <IN_META_COMMENT    :   "!--"> : IN_COMMENT
+    <META_COMMENT    :   "!--"> : IN_META_COMMENT
     |
     <IGNORE : "@ignore">
     |
@@ -119,7 +119,13 @@ SPECIAL_TOKEN:
     <N_COMMENT_END    : ["\r","\n"]>  : IN_NARRATIVE
 }
 
-<IN_COMMENT,IN_NARRATIVE_COMMENT> MORE:
+<IN_META_COMMENT>
+SPECIAL_TOKEN:
+{
+    <M_COMMENT_END    : ["\r","\n"]>  : IN_META
+}
+
+<IN_COMMENT,IN_NARRATIVE_COMMENT, IN_META_COMMENT> MORE:
 {
     < ~[] >
 }
@@ -203,6 +209,8 @@ private boolean Meta():
 {
     <META>
     (
+        <META_COMMENT>
+        |
         (
             <IGNORE>
             { isIgnored = true; }
@@ -211,7 +219,7 @@ private boolean Meta():
         <IN_META_ANY>
     )*
 
-    (<IN_META_NARRATIVE>|<IN_META_SCENARIO>|<IN_META_COMMENT>|<IN_META_GIVEN>|<EOF>)
+    (<IN_META_NARRATIVE>|<IN_META_SCENARIO>|<IN_META_GIVEN>|<EOF>)
 
     {
         System.out.printf("Meta: [ignored - %s]\n", isIgnored);

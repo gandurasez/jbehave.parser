@@ -43,7 +43,7 @@ public interface StoryParserConstants {
     /**
      * RegularExpression Id.
      */
-    int IN_META_COMMENT = 12;
+    int META_COMMENT = 12;
     /**
      * RegularExpression Id.
      */
@@ -79,50 +79,58 @@ public interface StoryParserConstants {
     /**
      * RegularExpression Id.
      */
-    int IN_GIVEN_META = 23;
+    int M_COMMENT_END = 21;
     /**
      * RegularExpression Id.
      */
-    int IN_GIVEN_SCENARIO = 24;
+    int IN_GIVEN_META = 24;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_META = 26;
+    int IN_GIVEN_SCENARIO = 25;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_SCENARIO = 27;
+    int IN_SCENARIO_META = 27;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_COMMENT = 28;
+    int IN_SCENARIO_SCENARIO = 28;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_GIVEN = 29;
+    int IN_SCENARIO_COMMENT = 29;
     /**
      * RegularExpression Id.
      */
-    int IN_SCENARIO_ANY = 30;
+    int IN_SCENARIO_GIVEN = 30;
+    /**
+     * RegularExpression Id.
+     */
+    int IN_SCENARIO_ANY = 31;
 
     /**
      * Lexical state.
      */
     int DEFAULT = 0;
-    /** Lexical state. */
-  int IN_META = 1;
+    /**
+     * Lexical state.
+     */
+    int IN_META = 1;
   /** Lexical state. */
   int IN_NARRATIVE = 2;
-    /** Lexical state. */
+  /** Lexical state. */
   int IN_COMMENT = 3;
     /**
      * Lexical state.
      */
     int IN_NARRATIVE_COMMENT = 4;
   /** Lexical state. */
-  int IN_GIVEN = 5;
+  int IN_META_COMMENT = 5;
+    /** Lexical state. */
+  int IN_GIVEN = 6;
   /** Lexical state. */
-  int IN_SCENARIO = 6;
+  int IN_SCENARIO = 7;
 
   /** Literal token values. */
   String[] tokenImage = {
@@ -135,7 +143,7 @@ public interface StoryParserConstants {
     "\"\\t\"",
     "\"\\n\"",
     "\"\\r\"",
-    "\"Narrative:\"",
+          "\"Narrative:\"",
           "\"Scenario:\"",
     "\"Given\"",
     "\"!--\"",
@@ -147,11 +155,12 @@ public interface StoryParserConstants {
     "<IN_NARRATIVE_ANY>",
     "<COMMENT_END>",
     "<N_COMMENT_END>",
-    "<token of kind 21>",
+    "<M_COMMENT_END>",
+    "<token of kind 22>",
     "\"!--\"",
     "\"Meta:\"",
     "\"Scenario:\"",
-    "<token of kind 25>",
+    "<token of kind 26>",
     "\"Meta:\"",
     "\"Scenario:\"",
     "\"!--\"",

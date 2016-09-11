@@ -31,12 +31,10 @@ public final class StoryParser implements StoryParserConstants {
   private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
   private int[] jj_expentry;
   private int jj_kind = -1;
-
   /** Constructor with InputStream. */
   public StoryParser(java.io.InputStream stream) {
     this(stream, null);
   }
-
   /** Constructor with InputStream and supplied encoding */
   public StoryParser(java.io.InputStream stream, String encoding) {
     try {
@@ -49,7 +47,6 @@ public final class StoryParser implements StoryParserConstants {
     jj_gen = 0;
     for (int i = 0; i < 11; i++) jj_la1[i] = -1;
   }
-
   /** Constructor. */
   public StoryParser(java.io.Reader stream) {
     jj_input_stream = new SimpleCharStream(stream, 1, 1);
@@ -77,8 +74,7 @@ public final class StoryParser implements StoryParserConstants {
             return new StoryParser(reader).parseStory(file.getName());
         } catch(Exception e) {
             throw new IllegalArgumentException("Unable to parse", e);
-        }
-        finally {
+        } finally {
           if (reader != null) {
             try {
               reader.close();
@@ -89,7 +85,7 @@ public final class StoryParser implements StoryParserConstants {
     }
 
   private static void jj_la1_init_0() {
-    jj_la1_0 = new int[]{0x2, 0x8, 0x1, 0x6000, 0x6000, 0x1e01, 0x60000, 0x60000, 0x18001, 0x40000000, 0x3c000001,};
+    jj_la1_0 = new int[]{0x2, 0x8, 0x1, 0x7000, 0x7000, 0xe01, 0x60000, 0x60000, 0x18001, 0x80000000, 0x78000001,};
    }
 
   final public Story parseStory(final String fileName) throws ParseException {
@@ -137,6 +133,7 @@ public final class StoryParser implements StoryParserConstants {
     label_2:
     while (true) {
       switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        case META_COMMENT:
         case IGNORE:
         case IN_META_ANY:
           break;
@@ -145,6 +142,9 @@ public final class StoryParser implements StoryParserConstants {
           break label_2;
       }
       switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        case META_COMMENT:
+          jj_consume_token(META_COMMENT);
+          break;
         case IGNORE:
           jj_consume_token(IGNORE);
           isIgnored = true;
@@ -164,9 +164,6 @@ public final class StoryParser implements StoryParserConstants {
         break;
       case IN_META_SCENARIO:
         jj_consume_token(IN_META_SCENARIO);
-        break;
-      case IN_META_COMMENT:
-        jj_consume_token(IN_META_COMMENT);
         break;
       case IN_META_GIVEN:
         jj_consume_token(IN_META_GIVEN);
@@ -276,7 +273,7 @@ public final class StoryParser implements StoryParserConstants {
     }
     System.out.printf("Scenario: [%s]\u005cn", builder.toString());
     if (isIgnored) {
-      scenarios.add(new Scenario(builder.toString(), relatedJiras, isIgnored));
+      scenarios.add(new Scenario(builder.toString(), relatedJiras, isIgnored ));
         }
   }
 
@@ -360,7 +357,7 @@ public final class StoryParser implements StoryParserConstants {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[31];
+    boolean[] la1tokens = new boolean[32];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -374,7 +371,7 @@ public final class StoryParser implements StoryParserConstants {
         }
       }
     }
-    for (int i = 0; i < 31; i++) {
+    for (int i = 0; i < 32; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

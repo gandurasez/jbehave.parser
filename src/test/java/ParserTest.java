@@ -130,4 +130,36 @@ public class ParserTest {
         checkScenario(itr.next(), "scenario description3");
         checkScenario(itr.next(), "scenario description4");
     }
+
+    @Test
+    public void test10() {
+        final Story story = getStory("test10.story");
+        checkStory(story,
+                "As a user\n" +
+                        "I want to perform an action\n" +
+                        "So that I can achieve a business goal",
+                s -> s.size() == 4);
+
+        final Iterator<Scenario> itr = story.getScenarios().iterator();
+        checkScenario(itr.next(), "scenario description1");
+        checkScenario(itr.next(), "scenario description2");
+        checkScenario(itr.next(), "scenario description3");
+        checkScenario(itr.next(), "scenario description4");
+    }
+
+    @Test
+    public void test11() {
+        final Story story = getStory("test11.story");
+        checkStory(story,
+                "As a user\n" +
+                        "I want to perform an action\n" +
+                        "So that I can achieve a business goal",
+                s -> s.size() == 4);
+
+        final Iterator<Scenario> itr = story.getScenarios().iterator();
+        checkScenario(itr.next(), "scenario description1");
+        checkScenario(itr.next(), "scenario description2");
+        checkScenario(itr.next(), "scenario description3");
+        checkScenario(itr.next(), "scenario description4");
+    }
 }
