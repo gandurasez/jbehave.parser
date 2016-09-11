@@ -70,9 +70,9 @@ TOKEN:
     }   :   DEFAULT
     |
     <IN_META_SCENARIO  : "Scenario:">
-        {
-            input_stream.backup(9);
-        }   :   DEFAULT
+    {
+        input_stream.backup(9);
+    }   :   DEFAULT
     |
     <IN_META_GIVEN  : "Given">
             {
